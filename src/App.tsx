@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { X } from 'lucide-react';
 import WelcomeSection from './components/WelcomeSection';
 import KeyGenerationSection from './components/KeyGenerationSection';
 import BackupSection from './components/BackupSection';
@@ -12,6 +13,7 @@ function App() {
   const [currentStep, setCurrentStep] = useState<AppStep>('welcome');
   const [keys, setKeys] = useState<KeyPair | null>(null);
   const [profile, setProfile] = useState<NostrProfile>({});
+  const [showEscapeHint, setShowEscapeHint] = useState(false);
 
   const steps: AppStep[] = ['welcome', 'keys', 'backup', 'profile', 'relays', 'success'];
   const currentStepIndex = steps.indexOf(currentStep);
@@ -31,6 +33,37 @@ function App() {
   const handleProfileUpdate = (newProfile: NostrProfile) => {
     setProfile(newProfile);
   };
+
+  const handleEscape = () => {
+    setCurrentStep('welcome');
+    setKeys(null);
+    setProfile({});
+  };
+
+  // Handle escape key press
+  React.useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && currentStep !== 'welcome' && currentStep !== 'success') {
+        handleEscape();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [currentStep]);
+
+  // Show escape hint after 3 seconds on non-welcome steps
+  React.useEffect(() => {
+    if (currentStep !== 'welcome' && currentStep !== 'success') {
+      const timer = setTimeout(() => {
+        setShowEscapeHint(true);
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    } else {
+      setShowEscapeHint(false);
+    }
+  }, [currentStep]);
 
   // Progress indicator
   const ProgressIndicator = () => currentStep !== 'welcome' && currentStep !== 'success' ? (
@@ -66,6 +99,15 @@ function App() {
             </div>
           </div>
         </div>
+        
+        {/* Escape Button */}
+        <button
+          onClick={handleEscape}
+          className="fixed top-4 right-4 p-2 bg-white/90 hover:bg-white border border-gray-200 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-50 group"
+          title="Return to start (ESC)"
+        >
+          <X className="w-5 h-5 text-gray-600 group-hover:text-red-500 transition-colors" />
+        </button>
       </div>
     </div>
   ) : null;
@@ -75,6 +117,17 @@ function App() {
       <ProgressIndicator />
       
       <main className={currentStep !== 'welcome' && currentStep !== 'success' ? 'pt-16' : ''}>
+        {/* Escape Hint */}
+        {showEscapeHint && currentStep !== 'welcome' && currentStep !== 'success' && (
+          <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 animate-in fade-in slide-in-from-bottom-2 duration-500">
+            <div className="bg-black/80 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm flex items-center space-x-2 shadow-xl">
+              <span>Press</span>
+              <kbd className="bg-white/20 px-2 py-1 rounded text-xs font-mono">ESC</kbd>
+              <span>to start over</span>
+            </div>
+          </div>
+        )}
+
         {currentStep === 'welcome' && (
           <WelcomeSection onNext={handleNext} />
         )}
