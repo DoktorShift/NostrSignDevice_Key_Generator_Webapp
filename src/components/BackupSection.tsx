@@ -359,7 +359,7 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                 disabled={!hasAnyBackup}
                 className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-slate-400 disabled:to-slate-500 text-white py-4 px-10 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-200 disabled:cursor-not-allowed"
               >
-                {hasAnyBackup ? 'Continue to Security Check ✅' : 'Create a backup first ⚠️'}
+                {hasAnyBackup ? 'Continue to Security Check' : 'Create a backup first'}
               </button>
             </div>
           </div>
@@ -463,7 +463,7 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                 disabled={!quizComplete}
                 className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-slate-400 disabled:to-slate-500 text-white py-3 px-6 rounded-xl font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-200 disabled:cursor-not-allowed"
               >
-                {quizComplete ? 'Continue ✅' : 'Answer all questions ⚠️'}
+                {quizComplete ? 'Continue' : 'Answer all questions'}
               </button>
             </div>
           </div>
