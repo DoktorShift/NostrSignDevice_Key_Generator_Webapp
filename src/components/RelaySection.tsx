@@ -179,7 +179,7 @@ export default function RelaySection({ profile, keys, onPublishComplete }: Relay
               
               <div>
                 <h3 className="text-3xl font-bold text-black mb-4">
-                  🎉 You're Live on Nostr!
+                  You're Live on Nostr!
                 </h3>
                 <p className="text-slate-700 text-lg mb-6">
                   Successfully published to {publishResults.successful} of {publishResults.total} servers
