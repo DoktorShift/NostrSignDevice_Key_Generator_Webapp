@@ -299,6 +299,10 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                       Download Keys
                     </button>
                     {backupMethods.download && (
+                    <div className="mt-3 flex items-center justify-center text-sm text-green-600">
+                        <CheckCircle className="w-4 h-4 mr-2" />
+                        Backup file downloaded ✅
+                      </div>
                     )}
                   </div>
                 </div>
