@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Download, QrCode, AlertTriangle, Check, Copy, Eye, EyeOff, Info, CheckCircle, XCircle, HelpCircle, Key, Lock, FileText } from 'lucide-react';
+import { Shield, Download, QrCode, AlertTriangle, Check, Copy, Eye, EyeOff, CheckCircle, XCircle, Key, Lock, FileText, HelpCircle, Smartphone, Monitor, Cloud } from 'lucide-react';
 import type { KeyPair } from '../types/nostr';
 
 interface BackupSectionProps {
@@ -14,7 +14,6 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
   const [showPrivateKey, setShowPrivateKey] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
   const [backupMethods, setBackupMethods] = useState<Record<string, boolean>>({});
-  const [showTooltip, setShowTooltip] = useState<string | null>(null);
 
   const quizQuestions = [
     {
@@ -117,354 +116,354 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50/30 flex items-center justify-center p-4">
-      <div className="max-w-7xl mx-auto w-full">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="w-24 h-24 bg-gradient-to-br from-black to-slate-800 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl border border-slate-300/30">
-            <Shield className="w-12 h-12 text-white drop-shadow-lg" />
-          </div>
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-black via-slate-800 to-black bg-clip-text text-transparent mb-6">
-            {currentStep === 'backup' ? 'Secure Your Keys' : 'Security Knowledge Check'}
-          </h1>
-          <p className="text-slate-700 text-xl max-w-3xl mx-auto leading-relaxed">
-            {currentStep === 'backup' 
-              ? 'Your keys are your digital identity. Let\'s make sure they\'re safe and accessible only to you.' 
-              : 'Quick verification to ensure you understand the importance of key security'
-            }
-          </p>
-        </div>
-
+      <div className="max-w-6xl mx-auto w-full">
         {currentStep === 'backup' && (
-          <div className="space-y-12">
-            {/* Critical Warning - Redesigned */}
-            <div className="bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-2xl p-6 shadow-lg">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-black to-slate-800 rounded-xl flex items-center justify-center shadow-lg border border-slate-300/30 flex-shrink-0">
-                  <AlertTriangle className="w-6 h-6 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-black text-lg mb-2">Critical: Backup Required</h3>
-                  <p className="text-slate-700 text-sm leading-relaxed">
-                    We don't store your keys on our servers and cannot recover them. 
-                    You must create a backup to ensure you never lose access to your account.
-                  </p>
-                </div>
+          <>
+            {/* Header with Critical Warning */}
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+                <AlertTriangle className="w-8 h-8 text-white" />
+              </div>
+              <h1 className="text-4xl font-bold text-slate-900 mb-3">
+                Secure Your Identity
+              </h1>
+              <div className="bg-red-50 border border-red-200 rounded-xl p-4 max-w-2xl mx-auto">
+                <p className="text-red-800 font-semibold text-lg mb-2">⚠️ Critical: Backup Required</p>
+                <p className="text-red-700">
+                  Your keys are your only way to access this account. We cannot recover them if lost.
+                </p>
               </div>
             </div>
 
-            <div className="grid lg:grid-cols-4 gap-6">
-              {/* Keys Display - Redesigned */}
-              <div className="lg:col-span-3">
-                <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-slate-200/50">
-                  <div className="flex items-center justify-between mb-8">
-                    <h3 className="text-2xl font-bold text-black flex items-center">
+            <div className="grid lg:grid-cols-3 gap-6">
+              {/* Keys Display */}
+              <div className="lg:col-span-2">
+                <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+                  <div className="bg-gradient-to-r from-slate-800 to-black p-6 text-white">
+                    <div className="flex items-center">
                       <Key className="w-6 h-6 mr-3" />
-                      Your Nostr Keys
-                    </h3>
-                    <button
-                      onMouseEnter={() => setShowTooltip('keys-info')}
-                      onMouseLeave={() => setShowTooltip(null)}
-                      className="relative p-2 text-slate-400 hover:text-black transition-colors bg-slate-100 rounded-lg hover:bg-slate-200"
-                    >
-                      <HelpCircle className="w-5 h-5" />
-                      {showTooltip === 'keys-info' && (
-                        <div className="absolute right-0 top-full mt-2 w-72 bg-black text-white text-xs rounded-lg p-3 shadow-xl z-20">
-                          <div className="absolute -top-1 right-4 w-2 h-2 bg-black rotate-45"></div>
-                          <p className="mb-3"><strong>Public Key (npub):</strong> Safe to share. Others use this to find and verify you.</p>
-                          <p><strong>Private Key (nsec):</strong> Keep secret! This proves you own your identity.</p>
-                        </div>
-                      )}
-                    </button>
+                      <h2 className="text-xl font-bold">Your Nostr Keys</h2>
+                    </div>
                   </div>
                   
-                  <div className="space-y-4">
+                  <div className="p-6 space-y-4">
                     {/* Public Key */}
-                    <div className="bg-green-50/50 rounded-xl p-4 border border-green-200">
-                      <div className="flex items-center mb-3">
-                        <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-3 shadow-lg">
-                          <Eye className="w-5 h-5 text-white" />
+                    <div className="bg-green-50 rounded-xl p-4 border border-green-200">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center">
+                          <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center mr-3">
+                            <Eye className="w-4 h-4 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-slate-900">Public Key (npub)</h3>
+                            <p className="text-green-700 text-sm">✅ Safe to share with anyone</p>
+                          </div>
                         </div>
-                        <div>
-                          <h4 className="font-bold text-black">Public Key</h4>
-                          <p className="text-green-700 text-sm">Safe to share with anyone</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <input
-                          type="text"
-                          value={keys.npub}
-                          readOnly
-                          className="flex-1 p-3 border border-green-300 rounded-lg bg-white text-slate-800 font-mono text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        />
                         <button
                           onClick={() => {
                             handleCopy(keys.npub, 'npub');
                             markBackupMethod('copy-public');
                           }}
-                          className="p-3 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+                          className="p-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
                         >
                           {copied === 'npub' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                         </button>
                       </div>
+                      <input
+                        type="text"
+                        value={keys.npub}
+                        readOnly
+                        className="w-full p-3 border border-green-300 rounded-lg bg-white font-mono text-sm"
+                      />
                     </div>
 
                     {/* Private Key */}
-                    <div className="bg-red-50/50 rounded-xl p-4 border border-red-200">
-                      <div className="flex items-center mb-3">
-                        <div className="w-8 h-8 bg-gradient-to-br from-black to-slate-800 rounded-lg flex items-center justify-center mr-3 shadow-lg">
-                          <Lock className="w-5 h-5 text-white" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-black">Private Key</h4>
-                          <p className="text-red-700 text-sm">Keep this absolutely secret!</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <input
-                          type={showPrivateKey ? 'text' : 'password'}
-                          value={keys.nsec}
-                          readOnly
-                          className="flex-1 p-3 border border-red-300 rounded-lg bg-white text-slate-800 font-mono text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                        />
-                        <button
-                          onClick={() => setShowPrivateKey(!showPrivateKey)}
-                          className="p-3 bg-slate-500 hover:bg-slate-600 text-white rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
-                        >
-                          {showPrivateKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        </button>
-                        <button
-                          onClick={() => {
-                            handleCopy(keys.nsec, 'nsec');
-                            markBackupMethod('copy-private');
-                          }}
-                          className="p-3 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
-                        >
-                          {copied === 'nsec' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Mnemonic */}
-                    {keys.mnemonic && (
-                      <div className="bg-blue-50/50 rounded-xl p-4 border border-blue-200">
-                        <div className="flex items-center mb-3">
-                          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3 shadow-lg">
-                            <FileText className="w-5 h-5 text-white" />
+                    <div className="bg-red-50 rounded-xl p-4 border border-red-200">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center">
+                          <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-3">
+                            <Lock className="w-4 h-4 text-white" />
                           </div>
                           <div>
-                            <h4 className="font-bold text-black">Recovery Phrase</h4>
-                            <p className="text-blue-700 text-sm">Alternative backup method</p>
+                            <h3 className="font-bold text-slate-900">Private Key (nsec)</h3>
+                            <p className="text-red-700 text-sm">🔒 Keep absolutely secret!</p>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-3">
-                          <input
-                            type={showPrivateKey ? 'text' : 'password'}
-                            value={keys.mnemonic}
-                            readOnly
-                            className="flex-1 p-3 border border-blue-300 rounded-lg bg-white text-slate-800 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          />
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={() => setShowPrivateKey(!showPrivateKey)}
+                            className="p-2 bg-slate-500 hover:bg-slate-600 text-white rounded-lg transition-colors"
+                          >
+                            {showPrivateKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </button>
+                          <button
+                            onClick={() => {
+                              handleCopy(keys.nsec, 'nsec');
+                              markBackupMethod('copy-private');
+                            }}
+                            className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+                          >
+                            {copied === 'nsec' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                          </button>
+                        </div>
+                      </div>
+                      <input
+                        type={showPrivateKey ? 'text' : 'password'}
+                        value={keys.nsec}
+                        readOnly
+                        className="w-full p-3 border border-red-300 rounded-lg bg-white font-mono text-sm"
+                      />
+                    </div>
+
+                    {/* Mnemonic if available */}
+                    {keys.mnemonic && (
+                      <div className="bg-blue-50 rounded-xl p-4 border border-blue-200">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center">
+                            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-3">
+                              <FileText className="w-4 h-4 text-white" />
+                            </div>
+                            <div>
+                              <h3 className="font-bold text-slate-900">Recovery Phrase</h3>
+                              <p className="text-blue-700 text-sm">Alternative backup method</p>
+                            </div>
+                          </div>
                           <button
                             onClick={() => {
                               handleCopy(keys.mnemonic!, 'mnemonic');
                               markBackupMethod('copy-mnemonic');
                             }}
-                            className="p-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+                            className="p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
                           >
                             {copied === 'mnemonic' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                           </button>
                         </div>
+                        <input
+                          type={showPrivateKey ? 'text' : 'password'}
+                          value={keys.mnemonic}
+                          readOnly
+                          className="w-full p-3 border border-blue-300 rounded-lg bg-white font-mono text-sm"
+                        />
                       </div>
                     )}
                   </div>
                 </div>
               </div>
 
-              {/* Backup Options - Redesigned */}
+              {/* Backup Methods */}
               <div className="space-y-4">
-                {/* Download Backup */}
-                <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-5 shadow-xl border border-slate-200/50">
-                  <div className="text-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-black to-slate-800 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg border border-slate-300/30">
-                      <Download className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-lg font-bold text-black mb-2">Download Backup</h3>
-                    <p className="text-slate-700 text-sm mb-4 leading-relaxed">
-                      Save your keys as a secure file that you can import into any Nostr client
-                    </p>
-                    <button
-                      onClick={downloadKeyFile}
-                      className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 px-4 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center"
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      Download Keys
-                    </button>
-                    {backupMethods.download && (
-                    <div className="mt-3 flex items-center justify-center text-sm text-green-600">
-                        <CheckCircle className="w-4 h-4 mr-2" />
-                        Backup file downloaded ✅
+                <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+                  <div className="bg-gradient-to-r from-green-600 to-emerald-600 p-4 text-white">
+                    <h2 className="font-bold text-lg">Backup Methods</h2>
+                    <p className="text-green-100 text-sm">Choose at least one method</p>
+                  </div>
+                  
+                  <div className="p-4 space-y-4">
+                    {/* Download Method */}
+                    <div className="border border-slate-200 rounded-xl p-4 hover:border-green-300 transition-colors">
+                      <div className="flex items-center mb-3">
+                        <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-3">
+                          <Download className="w-5 h-5 text-blue-600" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-bold text-slate-900">Download File</h3>
+                          <p className="text-slate-600 text-sm">Secure JSON file for import</p>
+                        </div>
+                        {backupMethods.download && (
+                          <CheckCircle className="w-5 h-5 text-green-500" />
+                        )}
                       </div>
-                    )}
+                      <button
+                        onClick={downloadKeyFile}
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+                      >
+                        Download Keys
+                      </button>
+                    </div>
+
+                    {/* QR Code Method */}
+                    <div className="border border-slate-200 rounded-xl p-4 hover:border-green-300 transition-colors">
+                      <div className="flex items-center mb-3">
+                        <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mr-3">
+                          <QrCode className="w-5 h-5 text-purple-600" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-bold text-slate-900">QR Code</h3>
+                          <p className="text-slate-600 text-sm">Scan with your phone</p>
+                        </div>
+                        {backupMethods.qr && (
+                          <CheckCircle className="w-5 h-5 text-green-500" />
+                        )}
+                      </div>
+                      <div className="text-center">
+                        <img
+                          src={generateQRCode(keys.nsec)}
+                          alt="Private key QR"
+                          className="w-32 h-32 mx-auto border border-slate-200 rounded-lg"
+                          onLoad={() => markBackupMethod('qr')}
+                        />
+                        <button
+                          onClick={() => {
+                            const link = document.createElement('a');
+                            link.href = generateQRCode(keys.nsec);
+                            link.download = `buho-private-key-qr-${keys.npub.slice(4, 12)}.png`;
+                            link.click();
+                          }}
+                          className="mt-2 text-purple-600 hover:text-purple-700 text-sm font-medium"
+                        >
+                          Download QR
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Manual Copy Method */}
+                    <div className="border border-slate-200 rounded-xl p-4">
+                      <div className="flex items-center mb-2">
+                        <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center mr-3">
+                          <Copy className="w-5 h-5 text-slate-600" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-bold text-slate-900">Manual Copy</h3>
+                          <p className="text-slate-600 text-sm">Copy to password manager</p>
+                        </div>
+                        {(backupMethods['copy-private'] || backupMethods['copy-mnemonic']) && (
+                          <CheckCircle className="w-5 h-5 text-green-500" />
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* QR Code Backup */}
-                <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-5 shadow-xl border border-slate-200/50">
-                  <div className="text-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-black to-slate-800 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg border border-slate-300/30">
-                      <QrCode className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-lg font-bold text-black mb-2">QR Code Backup</h3>
-                    <div className="space-y-3">
-                      <div>
-                        <p className="text-xs text-slate-600 mb-2">Private Key QR Code</p>
-                        <div className="relative inline-block">
-                          <img
-                            src={generateQRCode(keys.nsec)}
-                            alt="Private key QR"
-                            className="w-28 h-28 mx-auto border-2 border-slate-200 rounded-lg shadow-lg"
-                            onLoad={() => markBackupMethod('qr')}
-                          />
-                          <button
-                            onClick={() => {
-                              const link = document.createElement('a');
-                              link.href = generateQRCode(keys.nsec);
-                              link.download = `buho-private-key-qr-${keys.npub.slice(4, 12)}.png`;
-                              link.click();
-                            }}
-                            className="absolute -bottom-2 -right-2 p-2 bg-black text-white rounded-full shadow-lg hover:bg-slate-800 transition-colors"
-                            title="Download QR Code"
-                          >
-                            <Download className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
-                      <p className="text-xs text-slate-500">
-                        Scan with your phone to backup securely
-                      </p>
-                      {backupMethods.qr && (
-                        <div className="flex items-center justify-center text-xs text-green-600">
-                          <CheckCircle className="w-4 h-4 mr-2" />
-                          QR code generated ✅
-                        </div>
-                      )}
+                {/* Why This Matters */}
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                  <div className="flex items-start">
+                    <HelpCircle className="w-5 h-5 text-amber-600 mt-0.5 mr-3 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-bold text-amber-800 mb-2">Why This Matters</h3>
+                      <ul className="text-amber-700 text-sm space-y-1">
+                        <li>• No company can recover your keys</li>
+                        <li>• Lost keys = lost account forever</li>
+                        <li>• Your backup is your only safety net</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
+            {/* Continue Button */}
             <div className="text-center mt-8">
               <button
                 onClick={() => setCurrentStep('verify')}
                 disabled={!hasAnyBackup}
-                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-slate-400 disabled:to-slate-500 text-white py-4 px-10 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-200 disabled:cursor-not-allowed"
+                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-slate-400 disabled:to-slate-500 text-white py-4 px-8 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-200 disabled:cursor-not-allowed"
               >
                 {hasAnyBackup ? 'Continue to Security Check' : 'Create a backup first'}
               </button>
             </div>
-          </div>
+          </>
         )}
 
         {currentStep === 'verify' && (
-          <div className="bg-white rounded-2xl p-6 shadow-xl border border-slate-200 space-y-6">
-            <div className="text-center mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-black to-slate-800 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg border border-slate-300/30">
-                <Shield className="w-6 h-6 text-white" />
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+                <Shield className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-black mb-2">
-                Quick Security Check
-              </h3>
-              <p className="text-slate-600 text-sm">
-                3 quick questions to ensure you understand key security
-              </p>
+              <h1 className="text-4xl font-bold text-slate-900 mb-3">Security Check</h1>
+              <p className="text-slate-600 text-lg">Quick verification to ensure you understand key security</p>
             </div>
-            
-            {quizQuestions.map((question, index) => (
-              <div key={question.id} className="bg-slate-50 rounded-lg p-4">
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 bg-gradient-to-br from-black to-slate-800 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg border border-slate-300/30 mt-1">
-                    <span className="text-white font-bold text-xs">{index + 1}</span>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-black font-semibold text-base mb-3">
-                      {question.question}
-                    </p>
-                    <div className="space-y-2">
-                      {question.options.map((option) => {
-                        const isSelected = quizAnswers[question.id] === option;
-                        const isCorrect = option === question.correct;
-                        const showResult = quizAnswers[question.id] && quizAnswers[question.id] !== '';
-                        
-                        return (
-                          <label 
-                            key={option} 
-                            className={`flex items-center space-x-2 cursor-pointer p-3 rounded-lg border transition-all duration-200 ${
-                              showResult
-                                ? isCorrect
-                                  ? 'border-green-300 bg-green-50'
-                                  : isSelected
-                                  ? 'border-red-300 bg-red-50'
-                                  : 'border-slate-200 bg-white'
-                                : isSelected
-                                ? 'border-green-300 bg-green-50'
-                                : 'border-slate-200 bg-white hover:border-green-200 hover:bg-green-50/50'
-                            }`}
-                          >
-                            <input
-                              type="radio"
-                              name={question.id}
-                              value={option}
-                              checked={isSelected}
-                              onChange={() => handleQuizAnswer(question.id, option)}
-                              className="w-4 h-4 text-green-600 border-slate-300 focus:ring-green-500"
-                            />
-                            <span className={`flex-1 text-sm ${
-                              showResult && isCorrect ? 'text-green-800 font-medium' : 'text-slate-700'
-                            }`}>
-                              {option}
-                            </span>
-                            {showResult && isCorrect && (
-                              <CheckCircle className="w-4 h-4 text-green-500" />
-                            )}
-                            {showResult && !isCorrect && isSelected && (
-                              <XCircle className="w-4 h-4 text-red-500" />
-                            )}
-                          </label>
-                        );
-                      })}
-                    </div>
-                    {quizAnswers[question.id] && (
-                      <div className="mt-3 p-2 bg-blue-50 border border-blue-200 rounded-lg">
-                        <p className="text-slate-700 text-xs">
-                          <strong>💡</strong> {question.explanation}
-                        </p>
+
+            <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
+              <div className="space-y-6">
+                {quizQuestions.map((question, index) => (
+                  <div key={question.id} className="bg-slate-50 rounded-xl p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="w-8 h-8 bg-gradient-to-br from-slate-800 to-black rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold text-sm">{index + 1}</span>
                       </div>
-                    )}
+                      <div className="flex-1">
+                        <h3 className="font-bold text-slate-900 text-lg mb-4">
+                          {question.question}
+                        </h3>
+                        <div className="space-y-3">
+                          {question.options.map((option) => {
+                            const isSelected = quizAnswers[question.id] === option;
+                            const isCorrect = option === question.correct;
+                            const showResult = quizAnswers[question.id] && quizAnswers[question.id] !== '';
+                            
+                            return (
+                              <label 
+                                key={option} 
+                                className={`flex items-center space-x-3 cursor-pointer p-4 rounded-lg border transition-all duration-200 ${
+                                  showResult
+                                    ? isCorrect
+                                      ? 'border-green-300 bg-green-50'
+                                      : isSelected
+                                      ? 'border-red-300 bg-red-50'
+                                      : 'border-slate-200 bg-white'
+                                    : isSelected
+                                    ? 'border-green-300 bg-green-50'
+                                    : 'border-slate-200 bg-white hover:border-green-200 hover:bg-green-50/50'
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  name={question.id}
+                                  value={option}
+                                  checked={isSelected}
+                                  onChange={() => handleQuizAnswer(question.id, option)}
+                                  className="w-5 h-5 text-green-600 border-slate-300 focus:ring-green-500"
+                                />
+                                <span className={`flex-1 ${
+                                  showResult && isCorrect ? 'text-green-800 font-medium' : 'text-slate-700'
+                                }`}>
+                                  {option}
+                                </span>
+                                {showResult && isCorrect && (
+                                  <CheckCircle className="w-5 h-5 text-green-500" />
+                                )}
+                                {showResult && !isCorrect && isSelected && (
+                                  <XCircle className="w-5 h-5 text-red-500" />
+                                )}
+                              </label>
+                            );
+                          })}
+                        </div>
+                        {quizAnswers[question.id] && (
+                          <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                            <p className="text-slate-700 text-sm">
+                              <strong>💡 </strong>{question.explanation}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {quizComplete && (
+                <div className="mt-8 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-300 rounded-xl p-6">
+                  <div className="flex items-center justify-center space-x-3 text-green-800">
+                    <CheckCircle className="w-8 h-8 text-green-500" />
+                    <div className="text-center">
+                      <h3 className="font-bold text-lg">Perfect! You understand key security.</h3>
+                      <p className="text-green-700">You're ready to continue safely.</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              )}
 
-            {quizComplete && (
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-300 rounded-lg p-4">
-                <div className="flex items-center justify-center space-x-2 text-green-800">
-                  <CheckCircle className="w-6 h-6 text-green-500" />
-                  <div className="text-center">
-                    <h4 className="font-semibold text-base">Perfect! You understand key security.</h4>
-                    <p className="text-green-700 text-sm">Ready to continue.</p>
-                  </div>
-                </div>
+              <div className="text-center mt-8">
+                <button
+                  onClick={onBackupComplete}
+                  disabled={!quizComplete}
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-slate-400 disabled:to-slate-500 text-white py-4 px-8 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-200 disabled:cursor-not-allowed"
+                >
+                  {quizComplete ? 'Continue to Profile Setup' : 'Answer all questions to continue'}
+                </button>
               </div>
-            )}
-
-            <div className="text-center">
-              <button
-                onClick={onBackupComplete}
-                disabled={!quizComplete}
-                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-slate-400 disabled:to-slate-500 text-white py-3 px-6 rounded-xl font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-200 disabled:cursor-not-allowed"
-              >
-                {quizComplete ? 'Continue' : 'Answer all questions'}
-              </button>
             </div>
           </div>
         )}
