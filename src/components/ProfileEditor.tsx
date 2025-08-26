@@ -15,7 +15,6 @@ export default function ProfileEditor({ profile, onProfileUpdate, onNext }: Prof
   const handleChange = (field: keyof NostrProfile, value: string) => {
     const updatedProfile = { ...localProfile, [field]: value };
     setLocalProfile(updatedProfile);
-    onProfileUpdate(updatedProfile);
     
     // Clear validation error when user starts typing
     if (validationErrors[field]) {
@@ -23,6 +22,14 @@ export default function ProfileEditor({ profile, onProfileUpdate, onNext }: Prof
     }
   };
 
+  // Update parent component when local profile changes (debounced)
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      onProfileUpdate(localProfile);
+    }, 300);
+    
+    return () => clearTimeout(timeoutId);
+  }, [localProfile, onProfileUpdate]);
   const validateUrl = (url: string): boolean => {
     try {
       new URL(url);
