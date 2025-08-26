@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Download, QrCode, AlertTriangle, Check, Copy, Eye, EyeOff, CheckCircle, XCircle, Key, Lock, FileText, HelpCircle, Smartphone, Monitor, Cloud } from 'lucide-react';
+import { Shield, Download, QrCode, AlertTriangle, Check, Copy, Eye, EyeOff, CheckCircle, XCircle, Key, Lock, FileText, HelpCircle } from 'lucide-react';
 import type { KeyPair } from '../types/nostr';
 
 interface BackupSectionProps {
@@ -115,48 +115,54 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
   }, [quizAnswers]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50/30 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center p-4">
       <div className="max-w-6xl mx-auto w-full">
         {currentStep === 'backup' && (
           <>
-            {/* Header with Critical Warning */}
+            {/* Header */}
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
-                <AlertTriangle className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-gradient-to-br from-slate-800 to-black rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+                <Shield className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-4xl font-bold text-slate-900 mb-3">
+              <h1 className="text-4xl font-bold text-slate-900 mb-4">
                 Secure Your Identity
               </h1>
-              <div className="bg-red-50 border border-red-200 rounded-xl p-4 max-w-2xl mx-auto">
-                <p className="text-red-800 font-semibold text-lg mb-2">⚠️ Critical: Backup Required</p>
-                <p className="text-red-700">
-                  Your keys are your only way to access this account. We cannot recover them if lost.
-                </p>
+              <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-2xl mx-auto">
+                <div className="flex items-start space-x-4">
+                  <AlertTriangle className="w-6 h-6 text-white mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-bold text-white text-lg mb-2">Critical: Backup Required</h3>
+                    <p className="text-slate-300 leading-relaxed">
+                      Your keys are your only way to access this account. We cannot recover them if lost.
+                      Choose at least one backup method below.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-6">
+            <div className="grid lg:grid-cols-3 gap-8">
               {/* Keys Display */}
               <div className="lg:col-span-2">
                 <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
-                  <div className="bg-gradient-to-r from-slate-800 to-black p-6 text-white">
-                    <div className="flex items-center">
+                  <div className="bg-gradient-to-r from-slate-800 to-black p-6">
+                    <div className="flex items-center text-white">
                       <Key className="w-6 h-6 mr-3" />
                       <h2 className="text-xl font-bold">Your Nostr Keys</h2>
                     </div>
                   </div>
                   
-                  <div className="p-6 space-y-4">
+                  <div className="p-6 space-y-6">
                     {/* Public Key */}
-                    <div className="bg-green-50 rounded-xl p-4 border border-green-200">
-                      <div className="flex items-center justify-between mb-3">
+                    <div className="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                      <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
-                          <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center mr-3">
-                            <Eye className="w-4 h-4 text-white" />
+                          <div className="w-10 h-10 bg-slate-600 rounded-xl flex items-center justify-center mr-4">
+                            <Eye className="w-5 h-5 text-white" />
                           </div>
                           <div>
-                            <h3 className="font-bold text-slate-900">Public Key (npub)</h3>
-                            <p className="text-green-700 text-sm">✅ Safe to share with anyone</p>
+                            <h3 className="font-bold text-slate-900 text-lg">Public Key</h3>
+                            <p className="text-slate-600 text-sm">Safe to share with anyone</p>
                           </div>
                         </div>
                         <button
@@ -164,46 +170,46 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                             handleCopy(keys.npub, 'npub');
                             markBackupMethod('copy-public');
                           }}
-                          className="p-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
+                          className="p-3 bg-slate-600 hover:bg-slate-700 text-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
                         >
-                          {copied === 'npub' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                          {copied === 'npub' ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                         </button>
                       </div>
                       <input
                         type="text"
                         value={keys.npub}
                         readOnly
-                        className="w-full p-3 border border-green-300 rounded-lg bg-white font-mono text-sm"
+                        className="w-full p-4 border border-slate-300 rounded-xl bg-white font-mono text-sm text-slate-800 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
                       />
                     </div>
 
                     {/* Private Key */}
-                    <div className="bg-red-50 rounded-xl p-4 border border-red-200">
-                      <div className="flex items-center justify-between mb-3">
+                    <div className="border border-slate-300 rounded-xl p-4 bg-slate-100">
+                      <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
-                          <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-3">
-                            <Lock className="w-4 h-4 text-white" />
+                          <div className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center mr-4">
+                            <Lock className="w-5 h-5 text-white" />
                           </div>
                           <div>
-                            <h3 className="font-bold text-slate-900">Private Key (nsec)</h3>
-                            <p className="text-red-700 text-sm">🔒 Keep absolutely secret!</p>
+                            <h3 className="font-bold text-slate-900 text-lg">Private Key</h3>
+                            <p className="text-slate-700 text-sm">Keep absolutely secret</p>
                           </div>
                         </div>
                         <div className="flex space-x-2">
                           <button
                             onClick={() => setShowPrivateKey(!showPrivateKey)}
-                            className="p-2 bg-slate-500 hover:bg-slate-600 text-white rounded-lg transition-colors"
+                            className="p-3 bg-slate-500 hover:bg-slate-600 text-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
                           >
-                            {showPrivateKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                            {showPrivateKey ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                           </button>
                           <button
                             onClick={() => {
                               handleCopy(keys.nsec, 'nsec');
                               markBackupMethod('copy-private');
                             }}
-                            className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+                            className="p-3 bg-slate-800 hover:bg-slate-900 text-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
                           >
-                            {copied === 'nsec' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                            {copied === 'nsec' ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                           </button>
                         </div>
                       </div>
@@ -211,21 +217,21 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                         type={showPrivateKey ? 'text' : 'password'}
                         value={keys.nsec}
                         readOnly
-                        className="w-full p-3 border border-red-300 rounded-lg bg-white font-mono text-sm"
+                        className="w-full p-4 border border-slate-400 rounded-xl bg-white font-mono text-sm text-slate-800 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
                       />
                     </div>
 
                     {/* Mnemonic if available */}
                     {keys.mnemonic && (
-                      <div className="bg-blue-50 rounded-xl p-4 border border-blue-200">
-                        <div className="flex items-center justify-between mb-3">
+                      <div className="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                        <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center">
-                            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-3">
-                              <FileText className="w-4 h-4 text-white" />
+                            <div className="w-10 h-10 bg-slate-700 rounded-xl flex items-center justify-center mr-4">
+                              <FileText className="w-5 h-5 text-white" />
                             </div>
                             <div>
-                              <h3 className="font-bold text-slate-900">Recovery Phrase</h3>
-                              <p className="text-blue-700 text-sm">Alternative backup method</p>
+                              <h3 className="font-bold text-slate-900 text-lg">Recovery Phrase</h3>
+                              <p className="text-slate-600 text-sm">Alternative backup method</p>
                             </div>
                           </div>
                           <button
@@ -233,16 +239,16 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                               handleCopy(keys.mnemonic!, 'mnemonic');
                               markBackupMethod('copy-mnemonic');
                             }}
-                            className="p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+                            className="p-3 bg-slate-700 hover:bg-slate-800 text-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
                           >
-                            {copied === 'mnemonic' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                            {copied === 'mnemonic' ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                           </button>
                         </div>
                         <input
                           type={showPrivateKey ? 'text' : 'password'}
                           value={keys.mnemonic}
                           readOnly
-                          className="w-full p-3 border border-blue-300 rounded-lg bg-white font-mono text-sm"
+                          className="w-full p-4 border border-slate-300 rounded-xl bg-white font-mono text-sm text-slate-800 focus:ring-2 focus:ring-slate-500 focus:border-transparent"
                         />
                       </div>
                     )}
@@ -251,55 +257,59 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
               </div>
 
               {/* Backup Methods */}
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
-                  <div className="bg-gradient-to-r from-green-600 to-emerald-600 p-4 text-white">
-                    <h2 className="font-bold text-lg">Backup Methods</h2>
-                    <p className="text-green-100 text-sm">Choose at least one method</p>
+                  <div className="bg-gradient-to-r from-slate-700 to-slate-800 p-6 text-white">
+                    <h2 className="font-bold text-xl mb-2">Backup Methods</h2>
+                    <p className="text-slate-300">Choose at least one method</p>
                   </div>
                   
-                  <div className="p-4 space-y-4">
+                  <div className="p-6 space-y-4">
                     {/* Download Method */}
-                    <div className="border border-slate-200 rounded-xl p-4 hover:border-green-300 transition-colors">
-                      <div className="flex items-center mb-3">
-                        <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-3">
-                          <Download className="w-5 h-5 text-blue-600" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-bold text-slate-900">Download File</h3>
-                          <p className="text-slate-600 text-sm">Secure JSON file for import</p>
+                    <div className="border border-slate-200 rounded-xl p-4 hover:border-slate-300 hover:bg-slate-50 transition-all duration-200">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center">
+                          <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mr-3">
+                            <Download className="w-6 h-6 text-slate-700" />
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-slate-900">Download File</h3>
+                            <p className="text-slate-600 text-sm">Secure JSON file</p>
+                          </div>
                         </div>
                         {backupMethods.download && (
-                          <CheckCircle className="w-5 h-5 text-green-500" />
+                          <CheckCircle className="w-6 h-6 text-slate-600" />
                         )}
                       </div>
                       <button
                         onClick={downloadKeyFile}
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+                        className="w-full bg-slate-800 hover:bg-slate-900 text-white py-3 px-4 rounded-xl font-medium transition-all duration-200 shadow-lg hover:shadow-xl"
                       >
                         Download Keys
                       </button>
                     </div>
 
                     {/* QR Code Method */}
-                    <div className="border border-slate-200 rounded-xl p-4 hover:border-green-300 transition-colors">
-                      <div className="flex items-center mb-3">
-                        <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mr-3">
-                          <QrCode className="w-5 h-5 text-purple-600" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-bold text-slate-900">QR Code</h3>
-                          <p className="text-slate-600 text-sm">Scan with your phone</p>
+                    <div className="border border-slate-200 rounded-xl p-4 hover:border-slate-300 hover:bg-slate-50 transition-all duration-200">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center">
+                          <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mr-3">
+                            <QrCode className="w-6 h-6 text-slate-700" />
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-slate-900">QR Code</h3>
+                            <p className="text-slate-600 text-sm">Scan with device</p>
+                          </div>
                         </div>
                         {backupMethods.qr && (
-                          <CheckCircle className="w-5 h-5 text-green-500" />
+                          <CheckCircle className="w-6 h-6 text-slate-600" />
                         )}
                       </div>
                       <div className="text-center">
                         <img
                           src={generateQRCode(keys.nsec)}
                           alt="Private key QR"
-                          className="w-32 h-32 mx-auto border border-slate-200 rounded-lg"
+                          className="w-32 h-32 mx-auto border border-slate-200 rounded-xl"
                           onLoad={() => markBackupMethod('qr')}
                         />
                         <button
@@ -309,7 +319,7 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                             link.download = `buho-private-key-qr-${keys.npub.slice(4, 12)}.png`;
                             link.click();
                           }}
-                          className="mt-2 text-purple-600 hover:text-purple-700 text-sm font-medium"
+                          className="mt-3 text-slate-600 hover:text-slate-800 text-sm font-medium transition-colors"
                         >
                           Download QR
                         </button>
@@ -318,16 +328,18 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
 
                     {/* Manual Copy Method */}
                     <div className="border border-slate-200 rounded-xl p-4">
-                      <div className="flex items-center mb-2">
-                        <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center mr-3">
-                          <Copy className="w-5 h-5 text-slate-600" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-bold text-slate-900">Manual Copy</h3>
-                          <p className="text-slate-600 text-sm">Copy to password manager</p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mr-3">
+                            <Copy className="w-6 h-6 text-slate-700" />
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-slate-900">Manual Copy</h3>
+                            <p className="text-slate-600 text-sm">Copy to secure location</p>
+                          </div>
                         </div>
                         {(backupMethods['copy-private'] || backupMethods['copy-mnemonic']) && (
-                          <CheckCircle className="w-5 h-5 text-green-500" />
+                          <CheckCircle className="w-6 h-6 text-slate-600" />
                         )}
                       </div>
                     </div>
@@ -335,15 +347,24 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                 </div>
 
                 {/* Why This Matters */}
-                <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                <div className="bg-slate-100 border border-slate-300 rounded-xl p-6">
                   <div className="flex items-start">
-                    <HelpCircle className="w-5 h-5 text-amber-600 mt-0.5 mr-3 flex-shrink-0" />
+                    <HelpCircle className="w-6 h-6 text-slate-600 mt-1 mr-4 flex-shrink-0" />
                     <div>
-                      <h3 className="font-bold text-amber-800 mb-2">Why This Matters</h3>
-                      <ul className="text-amber-700 text-sm space-y-1">
-                        <li>• No company can recover your keys</li>
-                        <li>• Lost keys = lost account forever</li>
-                        <li>• Your backup is your only safety net</li>
+                      <h3 className="font-bold text-slate-900 mb-3">Why This Matters</h3>
+                      <ul className="text-slate-700 space-y-2">
+                        <li className="flex items-start">
+                          <span className="w-2 h-2 bg-slate-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                          <span>No company can recover your keys</span>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="w-2 h-2 bg-slate-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                          <span>Lost keys mean lost account forever</span>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="w-2 h-2 bg-slate-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                          <span>Your backup is your only safety net</span>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -356,7 +377,7 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
               <button
                 onClick={() => setCurrentStep('verify')}
                 disabled={!hasAnyBackup}
-                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-slate-400 disabled:to-slate-500 text-white py-4 px-8 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-200 disabled:cursor-not-allowed"
+                className="bg-gradient-to-r from-slate-800 to-black hover:from-black hover:to-slate-900 disabled:from-slate-400 disabled:to-slate-500 text-white py-4 px-8 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-200 disabled:cursor-not-allowed"
               >
                 {hasAnyBackup ? 'Continue to Security Check' : 'Create a backup first'}
               </button>
@@ -365,22 +386,24 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
         )}
 
         {currentStep === 'verify' && (
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+              <div className="w-16 h-16 bg-gradient-to-br from-slate-800 to-black rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
                 <Shield className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-4xl font-bold text-slate-900 mb-3">Security Check</h1>
-              <p className="text-slate-600 text-lg">Quick verification to ensure you understand key security</p>
+              <h1 className="text-4xl font-bold text-slate-900 mb-4">Security Check</h1>
+              <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+                Quick verification to ensure you understand key security
+              </p>
             </div>
 
             <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {quizQuestions.map((question, index) => (
-                  <div key={question.id} className="bg-slate-50 rounded-xl p-6">
+                  <div key={question.id} className="border border-slate-200 rounded-xl p-6">
                     <div className="flex items-start space-x-4">
-                      <div className="w-8 h-8 bg-gradient-to-br from-slate-800 to-black rounded-lg flex items-center justify-center flex-shrink-0">
-                        <span className="text-white font-bold text-sm">{index + 1}</span>
+                      <div className="w-10 h-10 bg-gradient-to-br from-slate-800 to-black rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold">{index + 1}</span>
                       </div>
                       <div className="flex-1">
                         <h3 className="font-bold text-slate-900 text-lg mb-4">
@@ -395,16 +418,16 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                             return (
                               <label 
                                 key={option} 
-                                className={`flex items-center space-x-3 cursor-pointer p-4 rounded-lg border transition-all duration-200 ${
+                                className={`flex items-center space-x-3 cursor-pointer p-4 rounded-xl border transition-all duration-200 ${
                                   showResult
                                     ? isCorrect
-                                      ? 'border-green-300 bg-green-50'
+                                      ? 'border-slate-400 bg-slate-100'
                                       : isSelected
-                                      ? 'border-red-300 bg-red-50'
+                                      ? 'border-slate-300 bg-slate-50'
                                       : 'border-slate-200 bg-white'
                                     : isSelected
-                                    ? 'border-green-300 bg-green-50'
-                                    : 'border-slate-200 bg-white hover:border-green-200 hover:bg-green-50/50'
+                                    ? 'border-slate-400 bg-slate-100'
+                                    : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50'
                                 }`}
                               >
                                 <input
@@ -413,27 +436,27 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                                   value={option}
                                   checked={isSelected}
                                   onChange={() => handleQuizAnswer(question.id, option)}
-                                  className="w-5 h-5 text-green-600 border-slate-300 focus:ring-green-500"
+                                  className="w-5 h-5 text-slate-600 border-slate-300 focus:ring-slate-500"
                                 />
                                 <span className={`flex-1 ${
-                                  showResult && isCorrect ? 'text-green-800 font-medium' : 'text-slate-700'
+                                  showResult && isCorrect ? 'text-slate-900 font-medium' : 'text-slate-700'
                                 }`}>
                                   {option}
                                 </span>
                                 {showResult && isCorrect && (
-                                  <CheckCircle className="w-5 h-5 text-green-500" />
+                                  <CheckCircle className="w-5 h-5 text-slate-600" />
                                 )}
                                 {showResult && !isCorrect && isSelected && (
-                                  <XCircle className="w-5 h-5 text-red-500" />
+                                  <XCircle className="w-5 h-5 text-slate-400" />
                                 )}
                               </label>
                             );
                           })}
                         </div>
                         {quizAnswers[question.id] && (
-                          <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                            <p className="text-slate-700 text-sm">
-                              <strong>💡 </strong>{question.explanation}
+                          <div className="mt-4 p-4 bg-slate-100 border border-slate-200 rounded-xl">
+                            <p className="text-slate-700 text-sm leading-relaxed">
+                              <strong>Explanation:</strong> {question.explanation}
                             </p>
                           </div>
                         )}
@@ -444,12 +467,12 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
               </div>
 
               {quizComplete && (
-                <div className="mt-8 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-300 rounded-xl p-6">
-                  <div className="flex items-center justify-center space-x-3 text-green-800">
-                    <CheckCircle className="w-8 h-8 text-green-500" />
+                <div className="mt-8 bg-slate-100 border border-slate-300 rounded-xl p-6">
+                  <div className="flex items-center justify-center space-x-4 text-slate-800">
+                    <CheckCircle className="w-8 h-8 text-slate-600" />
                     <div className="text-center">
                       <h3 className="font-bold text-lg">Perfect! You understand key security.</h3>
-                      <p className="text-green-700">You're ready to continue safely.</p>
+                      <p className="text-slate-600">You're ready to continue safely.</p>
                     </div>
                   </div>
                 </div>
@@ -459,7 +482,7 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                 <button
                   onClick={onBackupComplete}
                   disabled={!quizComplete}
-                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-slate-400 disabled:to-slate-500 text-white py-4 px-8 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-200 disabled:cursor-not-allowed"
+                  className="bg-gradient-to-r from-slate-800 to-black hover:from-black hover:to-slate-900 disabled:from-slate-400 disabled:to-slate-500 text-white py-4 px-8 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-200 disabled:cursor-not-allowed"
                 >
                   {quizComplete ? 'Continue to Profile Setup' : 'Answer all questions to continue'}
                 </button>
