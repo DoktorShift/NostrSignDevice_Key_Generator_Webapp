@@ -32,7 +32,7 @@ export default function SummarySection({ keys, profile, onNext, onStartOver }: S
             <CheckCircle className="w-10 h-10 text-white drop-shadow-lg" />
           </div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-black via-slate-800 to-black bg-clip-text text-transparent mb-4">
-            Everything Looks Great! 🎉
+            Everything Looks Great!
           </h1>
           <p className="text-slate-700 text-lg max-w-2xl mx-auto leading-relaxed">
             Your Nostr identity is ready. Let's review everything before going live.
