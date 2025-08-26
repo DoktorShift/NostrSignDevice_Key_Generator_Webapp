@@ -2,53 +2,79 @@
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦉</text></svg>" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦉</text></svg>"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buho - Your Wise Guide to Nostr</title>
-    <meta name="description" content="Create your secure Nostr identity with Buho - the easiest way to join the decentralized social web" />
+
+    <!-- Primary Meta Tags -->
+    <title>Create Your Online Identity - Join the decentralized social web today.</title>
+    <meta name="title" content="Create Your Online Identity - Join the decentralized social web today." />
+    <meta name="description" content="Nostr is an open, decentralized social network. Create your Nostr Identity in seconds, get your unique password, and start exploring a censorship-resistant way to connect online." />
     <meta name="keywords" content="nostr, decentralized, social media, identity, crypto, keys, buho" />
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Buho - Your Wise Guide to Nostr" />
-    <meta property="og:description" content="Create your secure Nostr identity with ease. Join the decentralized social web today." />
+    <meta name="author" content="DrShift" />
+    <meta name="application-name" content="Buho Nostr Identity Tool" />
+    <meta name="subject" content="Contribute to amke this site even more accessible and fun." />
+
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    
+    <meta property="og:url" content="https://nostrid.mybuho.de" />
+    <meta property="og:title" content="Create Your Online Identity - Join the decentralized social web today." />
+    <meta property="og:description" content="Nostr is an open, decentralized social network. Create your Nostr Identity in seconds, get your unique password, and start exploring a censorship-resistant way to connect online." />
+    <meta property="og:image" content="https://metatags.io/images/meta-tags.png" />
+
+    <!-- X (Twitter) -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://nostrid.mybuho.de" />
+    <meta property="twitter:title" content="Create Your Online Identity - Join the decentralized social web today." />
+    <meta property="twitter:description" content="Nostr is an open, decentralized social network. Create your Nostr Identity in seconds, get your unique password, and start exploring a censorship-resistant way to connect online." />
+    <meta property="twitter:image" content="https://metatags.io/images/meta-tags.png" />
+
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'sha256-A7NZ4V3TLtKRELtTw90r+prpWaCXr614PTu0clkU6AE=' 'unsafe-eval' data:; connect-src 'self' wss: https:;">
-    
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'sha256-A7NZ4V3TLtKRELtTw90r+prpWaCXr614PTu0clkU6AE=' 'unsafe-eval' data:; connect-src 'self' wss: https:;"
+    />
+
     <!-- Preload fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
-      html, body {
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      html,
+      body {
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
       }
-      
+
       /* Custom scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
-      
+
       ::-webkit-scrollbar-track {
         background: #f1f1f1;
       }
-      
+
       ::-webkit-scrollbar-thumb {
         background: #10b981;
         border-radius: 4px;
       }
-      
+
       ::-webkit-scrollbar-thumb:hover {
         background: #059669;
       }
-      
+
       /* Dark mode scrollbar */
       .dark ::-webkit-scrollbar-track {
         background: #374151;
       }
-      
+
       .dark ::-webkit-scrollbar-thumb {
         background: #10b981;
       }
@@ -58,9 +84,9 @@
     <div id="root"></div>
     <script>
       // Clear any problematic service workers
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(function(registrations) {
-          for(let registration of registrations) {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function (registrations) {
+          for (let registration of registrations) {
             registration.unregister();
           }
         });
