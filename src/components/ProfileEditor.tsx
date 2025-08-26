@@ -15,7 +15,6 @@ export default function ProfileEditor({ profile, onProfileUpdate, onNext }: Prof
   const handleChange = (field: keyof NostrProfile, value: string) => {
     const updatedProfile = { ...localProfile, [field]: value };
     setLocalProfile(updatedProfile);
-    onProfileUpdate(updatedProfile);
     
     // Clear validation error when user starts typing
     if (validationErrors[field]) {
@@ -23,6 +22,14 @@ export default function ProfileEditor({ profile, onProfileUpdate, onNext }: Prof
     }
   };
 
+  // Update parent component when local profile changes (debounced)
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      onProfileUpdate(localProfile);
+    }, 300);
+    
+    return () => clearTimeout(timeoutId);
+  }, [localProfile, onProfileUpdate]);
   const validateUrl = (url: string): boolean => {
     try {
       new URL(url);
@@ -60,17 +67,24 @@ export default function ProfileEditor({ profile, onProfileUpdate, onNext }: Prof
     field, 
     type = 'text', 
     placeholder, 
-    validation
+    validation,
+    maxLength
   }: {
     label: string;
     field: keyof NostrProfile;
     type?: string;
     placeholder: string;
     validation?: 'url' | 'email';
+    maxLength?: number;
   }) => (
-    <div className="space-y-2">
+    <div className="space-y-2 relative">
       <label className="block text-sm font-medium text-slate-700">
         {label}
+        {maxLength && (
+          <span className="text-xs text-slate-500 ml-2">
+            ({(localProfile[field] as string)?.length || 0}/{maxLength})
+          </span>
+        )}
       </label>
       
       <div className="relative">
@@ -79,8 +93,9 @@ export default function ProfileEditor({ profile, onProfileUpdate, onNext }: Prof
             value={localProfile[field] || ''}
             onChange={(e) => handleChange(field, e.target.value)}
             placeholder={placeholder}
+            maxLength={maxLength}
             rows={3}
-            className={`w-full p-3 border rounded-lg bg-white text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 resize-none text-sm ${
+            className={`w-full p-3 border rounded-xl bg-white text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 resize-none text-sm ${
               validationErrors[field] ? 'border-red-300 bg-red-50/50' : 'border-slate-200 hover:border-slate-300'
             }`}
           />
@@ -94,14 +109,15 @@ export default function ProfileEditor({ profile, onProfileUpdate, onNext }: Prof
               if (validation === 'email') handleEmailBlur(field, e.target.value);
             }}
             placeholder={placeholder}
-            className={`w-full p-3 border rounded-lg bg-white text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-sm ${
+            maxLength={maxLength}
+            className={`w-full p-3 border rounded-xl bg-white text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-sm ${
               validationErrors[field] ? 'border-red-300 bg-red-50/50' : 'border-slate-200 hover:border-slate-300'
             }`}
           />
         )}
         
         {validationErrors[field] && (
-          <div className="absolute -bottom-6 left-0 flex items-center text-red-600 text-xs">
+          <div className="absolute -bottom-5 left-0 flex items-center text-red-600 text-xs">
             <AlertCircle className="w-4 h-4 mr-2" />
             {validationErrors[field]}
           </div>
@@ -126,17 +142,19 @@ export default function ProfileEditor({ profile, onProfileUpdate, onNext }: Prof
         </div>
 
         <div className="bg-white rounded-2xl p-6 shadow-xl border border-slate-200">
-          <div className="space-y-4">
+          <div className="space-y-6">
             <InputField
               label="Display Name"
               field="display_name"
               placeholder="John Doe"
+              maxLength={100}
             />
             
             <InputField
               label="Username"
               field="name"
               placeholder="johndoe"
+              maxLength={50}
             />
             
             <InputField
@@ -144,6 +162,7 @@ export default function ProfileEditor({ profile, onProfileUpdate, onNext }: Prof
               field="about"
               type="textarea"
               placeholder="Tell people about yourself..."
+              maxLength={500}
             />
             
             <InputField
