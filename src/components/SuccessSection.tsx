@@ -83,7 +83,7 @@ export default function SuccessSection({ keys, profile }: SuccessSectionProps) {
           </div>
           
           <h1 className="text-5xl font-bold text-slate-900 mb-6">
-            🎉 You're on Nostr!
+            You're on Nostr!
           </h1>
           
           <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
