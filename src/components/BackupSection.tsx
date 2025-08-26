@@ -143,7 +143,7 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                   <AlertTriangle className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-black text-lg mb-2">⚠️ Critical: Backup Required</h3>
+                  <h3 className="font-bold text-black text-lg mb-2">Critical: Backup Required</h3>
                   <p className="text-slate-700 text-sm leading-relaxed">
                     We don't store your keys on our servers and cannot recover them. 
                     You must create a backup to ensure you never lose access to your account.
@@ -299,10 +299,6 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                       Download Keys
                     </button>
                     {backupMethods.download && (
-                      <div className="mt-3 flex items-center justify-center text-sm text-green-600">
-                        <CheckCircle className="w-4 h-4 mr-2" />
-                        Backup file downloaded ✅
-                      </div>
                     )}
                   </div>
                 </div>
