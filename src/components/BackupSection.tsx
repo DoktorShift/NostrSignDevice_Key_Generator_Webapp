@@ -23,8 +23,8 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
       id: 'lose-key',
       question: 'What happens if I lose my private key?',
       options: [
-        'I lose access to my account forever',
         'I can reset it with my email',
+        'I lose access to my account forever',
         'Buho can recover it for me'
       ],
       correct: 'I lose access to my account forever',
@@ -34,7 +34,7 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
     {
       id: 'share-key',
       question: 'Who should I share my private key with?',
-      options: ['Nobody, ever', 'Close friends only', 'Customer support if needed'],
+      options: ['Close friends only', 'Nobody, ever', 'Customer support if needed'],
       correct: 'Nobody, ever',
       explanation:
         'Your private key is like your digital DNA. Anyone with access can impersonate you completely.'
