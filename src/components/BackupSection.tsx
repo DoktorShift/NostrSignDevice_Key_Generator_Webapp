@@ -185,6 +185,7 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                             onClick={() => {
                               handleCopy(keys.nsec, 'nsec');
                               markBackupMethod('copy-private');
+                              if (navigator.vibrate) navigator.vibrate(10);
                             }}
                             className="p-3 rounded-xl border border-gray-900 bg-black text-white hover:bg-gray-900/90 transition-colors"
                             aria-label="Copy private key"
@@ -218,6 +219,7 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                             onClick={() => {
                               handleCopy(keys.mnemonic!, 'mnemonic');
                               markBackupMethod('copy-mnemonic');
+                              if (navigator.vibrate) navigator.vibrate(10);
                             }}
                             className="p-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 transition-colors"
                             aria-label="Copy mnemonic"
@@ -319,8 +321,8 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                     </div>
 
                     {/* Manual Copy Method */}
-                    <div className="border border-gray-200 rounded-xl p-4">
-                      <div className="flex items-center justify-between">
+                    <div className="border border-gray-200 rounded-xl p-4 relative">
+                      <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center">
                           <div className="w-12 h-12 rounded-xl flex items-center justify-center mr-3 bg-gray-100 border border-gray-200">
                             <Copy className="w-6 h-6 text-black" />
@@ -334,6 +336,30 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                           <CheckCircle className="w-6 h-6 text-gray-600" />
                         )}
                       </div>
+
+                      <button
+                        onClick={() => {
+                          handleCopy(keys.nsec, 'manual-nsec');
+                          markBackupMethod('copy-private');
+                          if (navigator.vibrate) navigator.vibrate(10);
+                        }}
+                        className="w-full rounded-xl py-3 px-4 font-medium text-white bg-black border border-black hover:bg-gray-900 transition-colors active:scale-[0.99]"
+                        aria-label="Copy nsec to clipboard"
+                      >
+                        Copy Private Key (nsec)
+                      </button>
+
+                      {/* Mobile-friendly toast */}
+                      {copied === 'manual-nsec' && (
+                        <div
+                          role="status"
+                          aria-live="polite"
+                          className="pointer-events-none fixed inset-x-0 bottom-4 mx-auto w-[90%] sm:w-auto sm:min-w-[260px] bg-black text-white text-sm font-medium px-4 py-3 rounded-2xl shadow-xl border border-gray-900/70 flex items-center justify-center gap-2"
+                        >
+                          <Check className="w-4 h-4 text-white" />
+                          Copied to clipboard
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
