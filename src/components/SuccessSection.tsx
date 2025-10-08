@@ -47,9 +47,9 @@ export default function SuccessSection({ keys, profile }: SuccessSectionProps) {
             <CheckCircle className="w-8 h-8 text-black" />
           </div>
 
-          <h1 className="text-4xl font-bold text-gray-900">You’re on Nostr!</h1>
+          <h1 className="text-4xl font-bold text-gray-900">Identity Created!</h1>
           <p className="text-gray-600 text-base mt-2 max-w-2xl mx-auto">
-            Your decentralized identity is live. Welcome to the future of social.
+            Your Nostr identity is ready. Now transfer your keys to your hardware device for maximum security.
           </p>
 
           {/* Identity card */}
@@ -71,8 +71,8 @@ export default function SuccessSection({ keys, profile }: SuccessSectionProps) {
         {/* What's Next */}
         <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-200 mb-12">
           <div className="flex items-center mb-6">
-            <Rocket className="w-6 h-6 text-black mr-3" />
-            <h2 className="text-xl font-semibold text-gray-900">What’s next</h2>
+            <Rocket className="w-6 h-6 text-purple-700 mr-3" />
+            <h2 className="text-xl font-semibold text-gray-900">What's next</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -80,24 +80,24 @@ export default function SuccessSection({ keys, profile }: SuccessSectionProps) {
               <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 bg-gray-100 border border-gray-200">
                 <span className="text-black font-bold text-lg">1</span>
               </div>
-              <p className="font-medium text-gray-900">Choose an app</p>
-              <p className="text-gray-600 text-sm">Pick a Nostr client below</p>
+              <p className="font-medium text-gray-900">Transfer your keys</p>
+              <p className="text-gray-600 text-sm">Import to your signing device</p>
             </div>
 
             <div className="text-center p-4">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 bg-gray-100 border border-gray-200">
                 <span className="text-black font-bold text-lg">2</span>
               </div>
-              <p className="font-medium text-gray-900">Import your key</p>
-              <p className="text-gray-600 text-sm">Use your private key to sign in</p>
+              <p className="font-medium text-gray-900">Configure device</p>
+              <p className="text-gray-600 text-sm">Set up WiFi and relay connections</p>
             </div>
 
             <div className="text-center p-4">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 bg-gray-100 border border-gray-200">
                 <span className="text-black font-bold text-lg">3</span>
               </div>
-              <p className="font-medium text-gray-900">Start connecting</p>
-              <p className="text-gray-600 text-sm">Follow people & join conversations</p>
+              <p className="font-medium text-gray-900">Connect apps</p>
+              <p className="text-gray-600 text-sm">Use NIP-46 to connect clients</p>
             </div>
           </div>
         </div>
@@ -105,8 +105,8 @@ export default function SuccessSection({ keys, profile }: SuccessSectionProps) {
         {/* Recommended Apps */}
         <div className="mb-12">
           <div className="flex items-center mb-6">
-            <Star className="w-6 h-6 text-black mr-3" />
-            <h2 className="text-xl font-semibold text-gray-900">Recommended apps</h2>
+            <Star className="w-6 h-6 text-purple-700 mr-3" />
+            <h2 className="text-xl font-semibold text-gray-900">Compatible Nostr clients</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 mb-8">
@@ -116,17 +116,17 @@ export default function SuccessSection({ keys, profile }: SuccessSectionProps) {
                 href={client.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-green-300 hover:shadow-lg transition-all"
+                className="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all"
               >
                 <div className="flex items-center justify-between mb-3">
-                  <p className="font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
+                  <p className="font-semibold text-gray-900 group-hover:text-purple-700 transition-colors">
                     {client.name}
                   </p>
                   <div className="flex items-center gap-2">
                     <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full border border-gray-200">
                       {client.category}
                     </span>
-                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-green-600 transition-colors" />
+                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-purple-600 transition-colors" />
                   </div>
                 </div>
                 <p className="text-gray-600 text-sm">{client.description}</p>
@@ -144,13 +144,13 @@ export default function SuccessSection({ keys, profile }: SuccessSectionProps) {
                   href={client.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white p-4 rounded-xl border border-gray-200 hover:border-green-300 transition-all"
+                  className="group bg-white p-4 rounded-xl border border-gray-200 hover:border-purple-300 transition-all"
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <p className="font-medium text-gray-900 group-hover:text-green-700 transition-colors">
+                    <p className="font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
                       {client.name}
                     </p>
-                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-green-600 transition-colors" />
+                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-purple-600 transition-colors" />
                   </div>
                   <p className="text-sm text-gray-600">{client.description}</p>
                 </a>
@@ -162,14 +162,14 @@ export default function SuccessSection({ keys, profile }: SuccessSectionProps) {
         {/* Key Security Reminder */}
         <div className="bg-white rounded-2xl p-6 border border-gray-200">
           <div className="flex items-start gap-3">
-            <Shield className="w-5 h-5 text-black mt-0.5" />
+            <Shield className="w-5 h-5 text-purple-700 mt-0.5" />
             <div>
-              <p className="font-medium text-gray-900 mb-1">Keep your keys safe</p>
+              <p className="font-medium text-gray-900 mb-1">Hardware device security</p>
               <div className="grid md:grid-cols-2 gap-2 text-gray-700 text-sm">
-                <p>• Your private key is your digital identity</p>
-                <p>• Never share it with anyone</p>
-                <p>• Keep secure backups in multiple places</p>
-                <p>• Consider using a password manager</p>
+                <p>• Transfer keys to your signing device securely</p>
+                <p>• Device requires manual approval for all requests</p>
+                <p>• Keys never leave the hardware</p>
+                <p>• Use touchscreen to authorize connections</p>
               </div>
             </div>
           </div>
@@ -181,21 +181,21 @@ export default function SuccessSection({ keys, profile }: SuccessSectionProps) {
             <button
               onClick={() => window.location.reload()}
               className="bg-white text-gray-800 border border-gray-300 px-6 py-3 rounded-xl font-medium
-                         transition-colors hover:bg-gray-50 hover:border-green-500 hover:text-green-700 inline-flex items-center"
+                         transition-colors hover:bg-gray-50 hover:border-purple-500 hover:text-purple-700 inline-flex items-center"
             >
               <ArrowRight className="w-4 h-4 mr-2 rotate-180" />
-              Create Another Account
+              Create Another Identity
             </button>
 
             <a
-              href="https://nostrapps.com"
+              href="https://github.com/lnbits/nsec-remote-signer"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white px-6 py-3 rounded-xl font-medium transition-colors bg-black border border-black
-                         hover:bg-green-600 hover:border-green-600 inline-flex items-center"
+              className="text-white px-6 py-3 rounded-xl font-medium transition-colors bg-gradient-to-r from-purple-600 to-purple-800
+                         hover:from-purple-700 hover:to-purple-900 inline-flex items-center"
             >
               <Globe className="w-4 h-4 mr-2" />
-              Explore More Apps
+              View Device Docs
             </a>
           </div>
         </div>

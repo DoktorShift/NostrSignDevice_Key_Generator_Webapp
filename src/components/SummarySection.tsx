@@ -221,16 +221,16 @@ export default function SummarySection({ keys, profile, onNext, onStartOver }: S
                 <button
                   onClick={onNext}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-xl py-4 px-6 font-semibold
-                             text-white bg-black border border-black hover:bg-green-600 hover:border-green-600 transition-colors group"
+                             text-white bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 transition-colors group"
                 >
-                  Go Live on Nostr
+                  Publish Profile to Network
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </button>
 
                 <button
                   onClick={onStartOver}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-xl py-3 px-6 font-medium
-                             text-gray-800 bg-white border-2 border-gray-300 hover:border-green-600 hover:text-green-700 transition-colors group"
+                             text-gray-800 bg-white border-2 border-gray-300 hover:border-purple-600 hover:text-purple-700 transition-colors group"
                 >
                   <RotateCcw className="w-4 h-4 transition-transform group-hover:-rotate-180" />
                   Start Over

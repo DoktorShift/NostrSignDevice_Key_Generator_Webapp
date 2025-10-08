@@ -71,12 +71,10 @@ function App() {
       <div className="max-w-4xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center space-x-2">
-            <img 
-              src="https://github.com/DoktorShift/images/blob/main/buho_logo.png?raw=true" 
-              alt="Buho Logo" 
-              className="w-6 h-6"
-            />
-            <span className="font-bold text-gray-800">Buho</span>
+            <svg className="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <span className="font-bold text-gray-800">Nostr Device Setup</span>
           </div>
           
           <div className="flex items-center space-x-4">
@@ -89,9 +87,9 @@ function App() {
                   key={step}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     index < currentStepIndex - 1 && currentStepIndex > 1
-                      ? 'bg-green-600 shadow-sm' 
+                      ? 'bg-purple-600 shadow-sm'
                       : index === currentStepIndex - 1 && currentStepIndex > 1
-                      ? 'bg-green-400 ring-2 ring-green-200' 
+                      ? 'bg-purple-400 ring-2 ring-purple-200'
                       : 'bg-gray-300'
                   }`}
                 />
@@ -113,7 +111,7 @@ function App() {
   ) : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50/50 via-white to-green-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50/50 via-white to-gray-50">
       <ProgressIndicator />
       
       <main className={currentStep !== 'welcome' && currentStep !== 'success' ? 'pt-16' : ''}>
