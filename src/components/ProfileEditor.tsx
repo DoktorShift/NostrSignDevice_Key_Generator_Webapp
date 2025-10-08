@@ -140,9 +140,9 @@ export default function ProfileEditor({ profile, onProfileUpdate, onNext }: Prof
           <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-200 bg-gray-50">
             <User className="w-8 h-8 text-black" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Create Your Profile</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Setup Device Profile</h1>
           <p className="text-gray-600 text-base max-w-lg mx-auto mt-2">
-            All fields are optional. Add what you want to share.
+            Configure your initial profile for the signing device. All fields optional.
           </p>
         </div>
 
@@ -201,8 +201,8 @@ export default function ProfileEditor({ profile, onProfileUpdate, onNext }: Prof
         <div className="text-center mt-6">
           <button
             onClick={onNext}
-            className="inline-flex items-center gap-2 bg-black hover:bg-gray-900 text-white
-                       py-3 px-8 rounded-xl font-semibold text-base border border-black transition-colors"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white
+                       py-3 px-8 rounded-xl font-semibold text-base transition-colors"
           >
             Continue
             <ArrowRight className="w-4 h-4" />

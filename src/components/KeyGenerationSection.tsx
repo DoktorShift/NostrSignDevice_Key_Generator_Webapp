@@ -28,8 +28,8 @@ export default function KeyGenerationSection({ onKeysGenerated }: KeyGenerationS
               <div className="w-14 h-14 rounded-2xl mx-auto mb-5 flex items-center justify-center border border-gray-200 bg-gray-50">
                 <Key className="w-7 h-7 text-black" />
               </div>
-              <h1 className="text-3xl font-bold text-gray-900">Generate Your Identity</h1>
-              <p className="text-gray-500 mt-2">Create your secure cryptographic keys</p>
+              <h1 className="text-3xl font-bold text-gray-900">Generate Device Keys</h1>
+              <p className="text-gray-500 mt-2">Create keys for your hardware signing device</p>
             </div>
 
             {/* Feature chips */}
@@ -40,8 +40,8 @@ export default function KeyGenerationSection({ onKeysGenerated }: KeyGenerationS
                     <Shield className="w-5 h-5 text-black" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 text-sm">Bank-Grade Security</h3>
-                    <p className="text-gray-500 text-xs">Military encryption</p>
+                    <h3 className="font-semibold text-gray-900 text-sm">Hardware Security</h3>
+                    <p className="text-gray-500 text-xs">Device-grade protection</p>
                   </div>
                 </div>
 
@@ -50,8 +50,8 @@ export default function KeyGenerationSection({ onKeysGenerated }: KeyGenerationS
                     <Lock className="w-5 h-5 text-black" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 text-sm">Zero Knowledge</h3>
-                    <p className="text-gray-500 text-xs">We never see your keys</p>
+                    <h3 className="font-semibold text-gray-900 text-sm">Offline Generation</h3>
+                    <p className="text-gray-500 text-xs">Keys stay in browser</p>
                   </div>
                 </div>
 
@@ -60,8 +60,8 @@ export default function KeyGenerationSection({ onKeysGenerated }: KeyGenerationS
                     <Globe className="w-5 h-5 text-black" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 text-sm">Global Access</h3>
-                    <p className="text-gray-500 text-xs">Works everywhere</p>
+                    <h3 className="font-semibold text-gray-900 text-sm">NIP-46 Ready</h3>
+                    <p className="text-gray-500 text-xs">Device compatible</p>
                   </div>
                 </div>
               </div>
@@ -86,11 +86,11 @@ export default function KeyGenerationSection({ onKeysGenerated }: KeyGenerationS
                   <ul className="space-y-2 text-gray-700">
                     <li className="flex items-center">
                       <span className="w-1.5 h-1.5 rounded-full bg-black mr-3"></span>
-                      Instant global recognition
+                      Hardware device compatible
                     </li>
                     <li className="flex items-center">
                       <span className="w-1.5 h-1.5 rounded-full bg-black mr-3"></span>
-                      Cross-platform compatibility
+                      Ready for NIP-46 signing
                     </li>
                   </ul>
                 </div>
@@ -101,7 +101,7 @@ export default function KeyGenerationSection({ onKeysGenerated }: KeyGenerationS
                 <button
                   onClick={handleCreate}
                   className="group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 font-semibold
-                             text-white bg-black hover:bg-gray-900 transition-colors border border-black shadow-sm"
+                             text-white bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 transition-colors shadow-sm"
                 >
                   Generate My Keys
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" />
@@ -115,21 +115,21 @@ export default function KeyGenerationSection({ onKeysGenerated }: KeyGenerationS
           <div className="bg-white rounded-3xl shadow-xl border border-gray-200 p-12 text-center">
             <div className="space-y-6">
               <div className="relative w-20 h-20 mx-auto">
-                <div className="w-20 h-20 border-4 border-gray-200 border-t-black rounded-full animate-spin"></div>
+                <div className="w-20 h-20 border-4 border-gray-200 border-t-purple-600 rounded-full animate-spin"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Key className="w-8 h-8 text-black" />
                 </div>
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-1">Generating Your Keys</h2>
-                <p className="text-gray-500">Creating your secure digital identity…</p>
+                <h2 className="text-2xl font-bold text-gray-900 mb-1">Generating Device Keys</h2>
+                <p className="text-gray-500">Creating your hardware identity…</p>
               </div>
 
               <div className="rounded-xl p-4 max-w-md mx-auto border border-gray-200 bg-gray-50">
                 <div className="flex items-center justify-center gap-6 text-sm text-gray-600">
                   <div className="flex items-center">
-                    <span className="w-2 h-2 bg-black rounded-full mr-2 animate-pulse"></span>
+                    <span className="w-2 h-2 bg-purple-600 rounded-full mr-2 animate-pulse"></span>
                     Generating keys
                   </div>
                   <div className="flex items-center">

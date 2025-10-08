@@ -115,7 +115,8 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
               <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-gray-200 bg-gray-50">
                 <Shield className="w-8 h-8 text-black" />
               </div>
-              <h1 className="text-4xl font-bold text-gray-900">Secure Your Identity</h1>
+              <h1 className="text-4xl font-bold text-gray-900">Backup Device Keys</h1>
+              <p className="text-gray-600 mt-2 text-lg">Save your keys before transferring to hardware</p>
             </div>
 
             <div className="grid lg:grid-cols-3 gap-8">
@@ -243,8 +244,7 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                         <div>
                           <h3 className="font-semibold text-gray-900 text-base">Critical: Backup Required</h3>
                           <p className="text-gray-600 text-sm">
-                            Your keys are your only way to access this account. We cannot recover them if lost.
-                            Choose at least one backup method below.
+                            These keys will be loaded onto your hardware device. Back them up now in case you need to restore your device later.
                           </p>
                         </div>
                       </div>
@@ -279,7 +279,7 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                       </div>
                       <button
                         onClick={downloadKeyFile}
-                        className="w-full rounded-xl py-3 px-4 font-medium text-white bg-black border border-black hover:bg-gray-900 transition-colors"
+                        className="w-full rounded-xl py-3 px-4 font-medium text-white bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 transition-colors"
                       >
                         Download Keys
                       </button>
@@ -343,7 +343,7 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                           markBackupMethod('copy-private');
                           if (navigator.vibrate) navigator.vibrate(10);
                         }}
-                        className="w-full rounded-xl py-3 px-4 font-medium text-white bg-black border border-black hover:bg-gray-900 transition-colors active:scale-[0.99]"
+                        className="w-full rounded-xl py-3 px-4 font-medium text-white bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 transition-colors active:scale-[0.99]"
                         aria-label="Copy nsec to clipboard"
                       >
                         Copy Private Key (nsec)
@@ -474,8 +474,8 @@ export default function BackupSection({ keys, onBackupComplete }: BackupSectionP
                 <button
                   onClick={onBackupComplete}
                   disabled={!quizComplete}
-                  className="rounded-xl py-4 px-8 font-semibold text-white bg-black border border-black
-                             hover:bg-gray-900 transition-colors disabled:bg-gray-300 disabled:border-gray-300
+                  className="rounded-xl py-4 px-8 font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-800
+                             hover:from-purple-700 hover:to-purple-900 transition-colors disabled:bg-gray-300 disabled:border-gray-300
                              disabled:text-white disabled:cursor-not-allowed"
                 >
                   {quizComplete ? 'Continue to Profile Setup' : 'Answer all questions to continue'}

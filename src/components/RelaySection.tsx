@@ -65,9 +65,9 @@ export default function RelaySection({ profile, keys, onPublishComplete }: Relay
           <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-200 bg-gray-50">
             <Radio className="w-8 h-8 text-black" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Going Live on Nostr</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Publish to Network</h1>
           <p className="text-gray-600 text-base max-w-2xl mx-auto mt-2">
-            We’ll publish your profile to multiple relays so others can find and connect with you.
+            Publishing your profile to Nostr relays so your device identity is discoverable.
           </p>
         </div>
 
@@ -80,8 +80,7 @@ export default function RelaySection({ profile, keys, onPublishComplete }: Relay
               </div>
 
               <p className="text-gray-700 max-w-xl mx-auto">
-                Your profile will be shared across a set of independent servers (relays). This keeps your identity
-                reachable, even if some relays go offline.
+                Your profile will be published to multiple Nostr relays. Once published, you can transfer your keys to your hardware device and connect using NIP-46.
               </p>
 
               <div className="border border-gray-200 rounded-2xl p-6 text-left max-w-2xl mx-auto">
@@ -111,9 +110,9 @@ export default function RelaySection({ profile, keys, onPublishComplete }: Relay
               <button
                 onClick={handlePublish}
                 className="inline-flex items-center justify-center rounded-xl px-10 py-4 font-semibold
-                           text-white bg-black border border-black hover:bg-gray-900 transition-colors"
+                           text-white bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 transition-colors"
               >
-                Publish My Profile
+                Publish Device Identity
               </button>
             </div>
           )}
@@ -123,10 +122,10 @@ export default function RelaySection({ profile, keys, onPublishComplete }: Relay
             <div className="p-10 space-y-8">
               <div className="text-center">
                 <div className="w-20 h-20 mx-auto mb-6">
-                  <div className="w-20 h-20 border-4 border-gray-200 border-t-black rounded-full animate-spin" />
+                  <div className="w-20 h-20 border-4 border-gray-200 border-t-purple-600 rounded-full animate-spin" />
                 </div>
-                <p className="text-lg font-semibold text-gray-900">Publishing your profile…</p>
-                <p className="text-gray-600">Sharing your profile across the Nostr network</p>
+                <p className="text-lg font-semibold text-gray-900">Publishing identity…</p>
+                <p className="text-gray-600">Broadcasting to Nostr relays</p>
               </div>
 
               <div className="max-w-2xl mx-auto">
@@ -174,12 +173,12 @@ export default function RelaySection({ profile, keys, onPublishComplete }: Relay
                 <CheckCircle className="w-8 h-8 text-black" />
               </div>
 
-              <p className="text-2xl font-bold text-gray-900">You’re live on Nostr</p>
+              <p className="text-2xl font-bold text-gray-900">Identity Published</p>
               <p className="text-gray-700">
                 Successfully published to {publishResults.successful} of {publishResults.total} relays.
               </p>
 
-              <p className="text-sm text-gray-500">Taking you to the final step…</p>
+              <p className="text-sm text-gray-500">Now you can transfer your keys to the hardware device…</p>
             </div>
           )}
         </div>
@@ -190,8 +189,7 @@ export default function RelaySection({ profile, keys, onPublishComplete }: Relay
             <div className="flex items-start gap-3">
               <Info className="w-5 h-5 text-black mt-0.5" />
               <p className="text-sm text-gray-700">
-                Nostr uses multiple independent servers (“relays”) to store and share your content. Publishing to several
-                relays helps keep your profile reachable even when some relays are offline.
+                Your device identity is now on the Nostr network. Transfer your private key to your signing device to start using NIP-46 remote signing.
               </p>
             </div>
           </div>
